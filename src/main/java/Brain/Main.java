@@ -36,6 +36,7 @@ public class Main {
                 list.add(increase);
             }
         }
+
         List<NumberHolder> objects = list.stream().filter(numberHolder1 -> numberHolder1.getCashSum() <= value).collect(Collectors.toList());
         NumberHolder maxHolder = Collections.max(objects, Comparator.comparingInt(NumberHolder::getCashSum));
         StringBuilder stringBuilder = new StringBuilder();
@@ -45,74 +46,74 @@ public class Main {
     }
 
 
-    private static class NumberHolder implements Cloneable {
-        private int first, second, third;
-//        private NumberHolderBack backup;
-        private final int degree;
-        private int cashSum;
-
-        private final int INITIAL_VALUE;
-
-        private NumberHolder(final int initial, final int degree) {
-            first = second = third = INITIAL_VALUE = initial;
-            this.degree = degree;
-            cashSum = sum();
-//            backup = new NumberHolderBack(initial, cashSum);
-        }
-
-        private NumberHolder increase(final int max) throws CloneNotSupportedException {
-//            backup.update(first, second, third, cashSum);
-
-            third++;
-            if (sum() > max) {
-                second++;
-                third = INITIAL_VALUE;
-                if (sum() > max) {
-                    first++;
-                    second = INITIAL_VALUE;
-                }
-            }
-            if (cashSum + 7 < max) return null;
-            return this.clone();
-        }
-
-        private int powerFirst() {
-            return (int) Math.pow(first, degree);
-        }
-
-//        private void undo() {
-//            backup.undo(this);
+//    private static class NumberHolder implements Cloneable {
+//        private int first, second, third;
+////        private NumberHolderBack backup;
+//        private final int degree;
+//        private int cashSum;
+//
+//        private final int INITIAL_VALUE;
+//
+//        private NumberHolder(final int initial, final int degree) {
+//            first = second = third = INITIAL_VALUE = initial;
+//            this.degree = degree;
+//            cashSum = sum();
+////            backup = new NumberHolderBack(initial, cashSum);
 //        }
-
-        private int sum() {
-            return cashSum = (int) (Math.pow(first, degree) + Math.pow(second, degree) + Math.pow(third, degree));
-        }
-
-        @Override
-        public String toString() {
-            return "Result = " + first + " " + second + " " + third + "\n";
-        }
-
-        @Override
-        public NumberHolder clone() throws CloneNotSupportedException {
-//            NumberHolder numberHolder = (NumberHolder) super.clone();
-//            numberHolder.backup = backup.clone();
-            return (NumberHolder) super.clone();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) return false;
-            if (obj instanceof NumberHolder) {
-                NumberHolder o = (NumberHolder) obj;
-                return cashSum == o.cashSum;
-            }
-            return false;
-        }
-
-        private int getCashSum() {
-            return cashSum;
-        }
+//
+//        private NumberHolder increase(final int max) throws CloneNotSupportedException {
+////            backup.update(first, second, third, cashSum);
+//
+//            third++;
+//            if (sum() > max) {
+//                second++;
+//                third = INITIAL_VALUE;
+//                if (sum() > max) {
+//                    first++;
+//                    second = INITIAL_VALUE;
+//                }
+//            }
+//            if (cashSum + 7 < max) return null;
+//            return this.clone();
+//        }
+//
+//        private int powerFirst() {
+//            return (int) Math.pow(first, degree);
+//        }
+//
+////        private void undo() {
+////            backup.undo(this);
+////        }
+//
+//        private int sum() {
+//            return cashSum = (int) (Math.pow(first, degree) + Math.pow(second, degree) + Math.pow(third, degree));
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Result = " + first + " " + second + " " + third + "\n";
+//        }
+//
+//        @Override
+//        public NumberHolder clone() throws CloneNotSupportedException {
+////            NumberHolder numberHolder = (NumberHolder) super.clone();
+////            numberHolder.backup = backup.clone();
+//            return (NumberHolder) super.clone();
+//        }
+//
+//        @Override
+//        public boolean equals(Object obj) {
+//            if (obj == null) return false;
+//            if (obj instanceof NumberHolder) {
+//                NumberHolder o = (NumberHolder) obj;
+//                return cashSum == o.cashSum;
+//            }
+//            return false;
+//        }
+//
+//        private int getCashSum() {
+//            return cashSum;
+//        }
 
 //        private static class NumberHolderBack implements Cloneable {
 //            private int first, second, third;
@@ -143,5 +144,5 @@ public class Main {
 //                return (NumberHolderBack) super.clone();
 //            }
 //        }
-    }
+//    }
 }
