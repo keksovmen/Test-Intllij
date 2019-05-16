@@ -7,14 +7,21 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class Main {
+public class MainFrame {
     private JTextField textFieldInput;
     private JTextArea textAreaZeroes;
     private JTextArea textAreaStraight;
     private JButton calculateButton;
     private JPanel mainPane;
 
-    public Main(final Consumer<Integer> consumer, Function<Integer, List<String>> calc) {
+    /**
+     * Ordinary JFrame with 2 callbacks
+     *
+     * @param consumer uses to pass the desired power of digits
+     * @param calc     uses to pass the input and retrieve the output
+     */
+
+    public MainFrame(final Consumer<Integer> consumer, Function<Integer, List<String>> calc) {
         JFrame jFrame = new JFrame("Number Parser");
         jFrame.setSize(300, 300);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,7 +30,7 @@ public class Main {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Power of digits");
-        JSpinner jSlider = new JSpinner(new SpinnerNumberModel(2, 2, Integer.MAX_VALUE, 1));
+        JSpinner jSlider = new JSpinner(new SpinnerNumberModel(2, 2, Integer.MAX_VALUE, 1));    //Used to change power of digits
         jSlider.addChangeListener(e -> consumer.accept((Integer) jSlider.getValue()));
         menu.add(jSlider);
         menuBar.add(menu);
@@ -62,7 +69,7 @@ public class Main {
             int i = Integer.parseInt(text);
             if (i <= 0) return 0;
             return i;
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return 0;
         }
     }
